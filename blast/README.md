@@ -162,23 +162,55 @@ This is roughly the number of hits you want to have included in your blast outpu
 ### \-num_threads
 This is roughly equivalent to the number of 'cores' your CPU has. It will speed the blast search up if you are able to use more than 1 core. Of course if you are running multiple concurrent blasts, you do not want to specify all the cores on your CPU as they will then have to compete.
 
-```
-$ blastp -db arabidopsis_thaliana.fas -query query_one.fas -out query_one_vs_arabidopsis_1e-10.out -evalue 1e-10 -outfmt 6 -max_target_seqs 10 -num_threads 2
+We will first run the blast command with the default output options so you can see what it looks like.
 
-$ cat query_one_vs_arabidopsis_1e-10.out
-
-AAH03584.2	NP_001328947.1	35.39	178	107	3	8	183	69	240	4e-32	121
-AAH03584.2	NP_001328950.1	35.39	178	107	3	8	183	22	193	1e-31	120
-AAH03584.2	NP_001328948.1	35.39	178	107	3	8	183	22	193	1e-31	120
-AAH03584.2	NP_195183.2	35.39	178	107	3	8	183	69	240	1e-31	121
-AAH03584.2	NP_001328949.1	35.39	178	107	3	8	183	44	215	1e-31	120
-AAH03584.2	NP_001324592.1	35.56	180	108	3	8	185	25	198	2e-30	116
-AAH03584.2	NP_179230.1	35.56	180	108	3	8	185	25	198	3e-30	116
-AAH03584.2	NP_001324593.1	35.56	180	108	3	8	185	25	198	3e-30	116
-AAH03584.2	NP_001324557.1	30.69	189	109	5	4	183	23	198	1e-22	95.5
-AAH03584.2	NP_179750.1	30.69	189	109	5	4	183	23	198	2e-22	95.1
 ```
-Here we can see the top 10 hits to our query sequence.
+$ blastp -db arabidopsis_thaliana.fas -query query_one.fas -out query_one_vs_arabidopsis_1e-10.out -evalue 1e-10 -outfmt 0 -max_target_seqs 10 -num_threads 2
+
+Warning: [blastp] The parameter -max_target_seqs is ignored for output formats, 0,1,2,3. Use -num_descriptions and -num_alignments to control output
+```
+In this case you can ignore the warning. Looking at the file you can see a lot of information in the traditional webpage view of your results. It shows you the alignments and other erroneous information. However, it is not a good format to easily parse with command-line tools. For that we can use the tabulated output option.
+
+```
+$ blastp -db homo_sapiens.fas -query query_one.fas -out query_one_vs_homo_1e-10.tab -evalue 1e-10 -outfmt 6 -max_target_seqs 10 -num_threads 2
+```
+
+Here we can see the 'top 10' (in this case top 6) hits to our query sequence.
+```
+$ cat query_one_vs_homo_1e-10.tab
+
+AAH03584.2	NP_000782.1	100.00	187	0	0	1	187	1	187	2e-137	387
+AAH03584.2	XP_011510839.1	93.44	183	12	0	5	187	5	187	1e-123	352
+AAH03584.2	NP_789785.1	93.44	183	12	0	5	187	5	187	1e-123	352
+AAH03584.2	NP_001182572.1	93.44	183	12	0	5	187	5	187	1e-123	352
+AAH03584.2	NP_001277283.1	100.00	135	0	0	53	187	1	135	4e-95	278
+AAH03584.2	NP_001277286.1	100.00	123	0	0	1	123	1	123	3e-86	255
+
+```
+
+Looking at the first line we can see our query accession `AAH03584.2` has hit the accession `NP_000782.1` in the database. The columns are ordered thus: query id and subject id followed by the percent identity, alignment length      number of mismatches, gap openings, query start position and query end position, the subject start and subject end and finally the e_value and bit_score.
+
+Now let's try the search again but against our 'eukaryotes' database.
+
+```
+$ blastp -db eukaryotes -query query_one.fas -out query_one_vs_eukaryotes_1e-10.tab -evalue 1e-10 -outfmt 6 -max_target_seqs 10 -num_threads 2
+
+$ cat query_one_vs_eukaryotes_1e-10.tab
+AAH03584.2	NP_000782.1	100.00	187	0	0	1	187	1	187	3e-137	387
+AAH03584.2	XP_011510839.1	93.44	183	12	0	5	187	5	187	2e-123	352
+AAH03584.2	NP_789785.1	93.44	183	12	0	5	187	5	187	2e-123	352
+AAH03584.2	NP_001182572.1	93.44	183	12	0	5	187	5	187	2e-123	352
+AAH03584.2	NP_001277283.1	100.00	135	0	0	53	187	1	135	6e-95	278
+AAH03584.2	NP_001277286.1	100.00	123	0	0	1	123	1	123	4e-86	255
+AAH03584.2	NP_001328947.1	35.39	178	107	3	8	183	69	240	2e-31	121
+AAH03584.2	NP_001328950.1	35.39	178	107	3	8	183	22	193	6e-31	120
+AAH03584.2	NP_001328948.1	35.39	178	107	3	8	183	22	193	6e-31	120
+AAH03584.2	NP_195183.2	35.39	178	107	3	8	183	69	240	6e-31	121
+```
+We can see the first top 6 hits from the previous search, but now we have some more hits too! But where did they come from? There are three ways to find out:
+ 1) search each file manually - slow
+ 2) search the accession on the NCBI website - slow, requires web browser
+ 3) get BLAST to tell us, but we need the taxonomy dump files - fast (after set up)
 
 
 
