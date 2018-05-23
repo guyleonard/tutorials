@@ -1,0 +1,263 @@
+BLASTP 2.2.31+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+Reference for composition-based statistics: Alejandro A. Schaffer,
+L. Aravind, Thomas L. Madden, Sergei Shavirin, John L. Spouge, Yuri
+I. Wolf, Eugene V. Koonin, and Stephen F. Altschul (2001),
+"Improving the accuracy of PSI-BLAST protein database searches with
+composition-based statistics and other refinements", Nucleic Acids
+Res. 29:2994-3005.
+
+
+
+Database: arabidopsis_thaliana.fas
+           48,350 sequences; 20,856,276 total letters
+
+
+
+Query= AAH03584.2 DHFR protein [Homo sapiens]
+
+Length=187
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+NP_001328947.1  thymidylate synthase 2                                121     4e-32
+NP_001328950.1  thymidylate synthase 2                                120     1e-31
+NP_001328948.1  thymidylate synthase 2                                120     1e-31
+NP_195183.2  thymidylate synthase 2                                   121     1e-31
+NP_001328949.1  thymidylate synthase 2                                120     1e-31
+NP_001324592.1  thymidylate synthase 1                                116     2e-30
+NP_179230.1  thymidylate synthase 1                                   116     3e-30
+NP_001324593.1  thymidylate synthase 1                                116     3e-30
+NP_001324557.1  Bifunctional dihydrofolate reductase/thymidylate ...  95.5    1e-22
+NP_179750.1  Bifunctional dihydrofolate reductase/thymidylate syn...  95.1    2e-22
+
+
+>NP_001328947.1 thymidylate synthase 2 [Arabidopsis thaliana]
+Length=408
+
+ Score = 121 bits (303),  Expect = 4e-32, Method: Compositional matrix adjust.
+ Identities = 63/178 (35%), Positives = 99/178 (56%), Gaps = 8/178 (4%)
+
+Query  8    IVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPEKNRP  67
+            +VA ++ MGIGK+G LPW  L  + ++F+ +T ++S   K+N V+MG+KTW SIP+K RP
+Sbjct  69   VVAATKEMGIGKDGKLPWN-LPTDLKFFKDLTLSTSDSAKKNAVVMGRKTWESIPKKYRP  127
+
+Query  68   LKGRINLVLSRELKEPPQGAH--FLSRSLDDALKLTEQPELANKVDMVWIVGGSSVYKEA  125
+            L GR+N+VLSR                S+D AL L   P  +  ++ V+++GG  + +EA
+Sbjct  128  LSGRLNVVLSRSSGFDIANTENVVTCSSIDSALDLLAAPPFSLSIEKVFVIGGGDILREA  187
+
+Query  126  MNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYKLLPEYPGVLSDVQEEKGIKYKFEVY  183
+            +N P    + +T I    + DTF P +D   Y+     P   S    E G+++ F  +
+Sbjct  188  LNKPSCEAIHITEIDTSIDCDTFIPTVDTSAYQ-----PWCSSFPICENGLRFSFTTH  240
+
+
+>NP_001328950.1 thymidylate synthase 2 [Arabidopsis thaliana]
+Length=518
+
+ Score = 120 bits (302),  Expect = 1e-31, Method: Compositional matrix adjust.
+ Identities = 63/178 (35%), Positives = 99/178 (56%), Gaps = 8/178 (4%)
+
+Query  8    IVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPEKNRP  67
+            +VA ++ MGIGK+G LPW  L  + ++F+ +T ++S   K+N V+MG+KTW SIP+K RP
+Sbjct  22   VVAATKEMGIGKDGKLPWN-LPTDLKFFKDLTLSTSDSAKKNAVVMGRKTWESIPKKYRP  80
+
+Query  68   LKGRINLVLSRELKEPPQGAH--FLSRSLDDALKLTEQPELANKVDMVWIVGGSSVYKEA  125
+            L GR+N+VLSR                S+D AL L   P  +  ++ V+++GG  + +EA
+Sbjct  81   LSGRLNVVLSRSSGFDIANTENVVTCSSIDSALDLLAAPPFSLSIEKVFVIGGGDILREA  140
+
+Query  126  MNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYKLLPEYPGVLSDVQEEKGIKYKFEVY  183
+            +N P    + +T I    + DTF P +D   Y+     P   S    E G+++ F  +
+Sbjct  141  LNKPSCEAIHITEIDTSIDCDTFIPTVDTSAYQ-----PWCSSFPICENGLRFSFTTH  193
+
+
+>NP_001328948.1 thymidylate synthase 2 [Arabidopsis thaliana]
+Length=518
+
+ Score = 120 bits (302),  Expect = 1e-31, Method: Compositional matrix adjust.
+ Identities = 63/178 (35%), Positives = 99/178 (56%), Gaps = 8/178 (4%)
+
+Query  8    IVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPEKNRP  67
+            +VA ++ MGIGK+G LPW  L  + ++F+ +T ++S   K+N V+MG+KTW SIP+K RP
+Sbjct  22   VVAATKEMGIGKDGKLPWN-LPTDLKFFKDLTLSTSDSAKKNAVVMGRKTWESIPKKYRP  80
+
+Query  68   LKGRINLVLSRELKEPPQGAH--FLSRSLDDALKLTEQPELANKVDMVWIVGGSSVYKEA  125
+            L GR+N+VLSR                S+D AL L   P  +  ++ V+++GG  + +EA
+Sbjct  81   LSGRLNVVLSRSSGFDIANTENVVTCSSIDSALDLLAAPPFSLSIEKVFVIGGGDILREA  140
+
+Query  126  MNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYKLLPEYPGVLSDVQEEKGIKYKFEVY  183
+            +N P    + +T I    + DTF P +D   Y+     P   S    E G+++ F  +
+Sbjct  141  LNKPSCEAIHITEIDTSIDCDTFIPTVDTSAYQ-----PWCSSFPICENGLRFSFTTH  193
+
+
+>NP_195183.2 thymidylate synthase 2 [Arabidopsis thaliana]
+Length=565
+
+ Score = 121 bits (303),  Expect = 1e-31, Method: Compositional matrix adjust.
+ Identities = 63/178 (35%), Positives = 99/178 (56%), Gaps = 8/178 (4%)
+
+Query  8    IVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPEKNRP  67
+            +VA ++ MGIGK+G LPW  L  + ++F+ +T ++S   K+N V+MG+KTW SIP+K RP
+Sbjct  69   VVAATKEMGIGKDGKLPWN-LPTDLKFFKDLTLSTSDSAKKNAVVMGRKTWESIPKKYRP  127
+
+Query  68   LKGRINLVLSRELKEPPQGAH--FLSRSLDDALKLTEQPELANKVDMVWIVGGSSVYKEA  125
+            L GR+N+VLSR                S+D AL L   P  +  ++ V+++GG  + +EA
+Sbjct  128  LSGRLNVVLSRSSGFDIANTENVVTCSSIDSALDLLAAPPFSLSIEKVFVIGGGDILREA  187
+
+Query  126  MNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYKLLPEYPGVLSDVQEEKGIKYKFEVY  183
+            +N P    + +T I    + DTF P +D   Y+     P   S    E G+++ F  +
+Sbjct  188  LNKPSCEAIHITEIDTSIDCDTFIPTVDTSAYQ-----PWCSSFPICENGLRFSFTTH  240
+
+
+>NP_001328949.1 thymidylate synthase 2 [Arabidopsis thaliana]
+Length=540
+
+ Score = 120 bits (302),  Expect = 1e-31, Method: Compositional matrix adjust.
+ Identities = 63/178 (35%), Positives = 99/178 (56%), Gaps = 8/178 (4%)
+
+Query  8    IVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPEKNRP  67
+            +VA ++ MGIGK+G LPW  L  + ++F+ +T ++S   K+N V+MG+KTW SIP+K RP
+Sbjct  44   VVAATKEMGIGKDGKLPWN-LPTDLKFFKDLTLSTSDSAKKNAVVMGRKTWESIPKKYRP  102
+
+Query  68   LKGRINLVLSRELKEPPQGAH--FLSRSLDDALKLTEQPELANKVDMVWIVGGSSVYKEA  125
+            L GR+N+VLSR                S+D AL L   P  +  ++ V+++GG  + +EA
+Sbjct  103  LSGRLNVVLSRSSGFDIANTENVVTCSSIDSALDLLAAPPFSLSIEKVFVIGGGDILREA  162
+
+Query  126  MNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYKLLPEYPGVLSDVQEEKGIKYKFEVY  183
+            +N P    + +T I    + DTF P +D   Y+     P   S    E G+++ F  +
+Sbjct  163  LNKPSCEAIHITEIDTSIDCDTFIPTVDTSAYQ-----PWCSSFPICENGLRFSFTTH  215
+
+
+>NP_001324592.1 thymidylate synthase 1 [Arabidopsis thaliana]
+Length=420
+
+ Score = 116 bits (291),  Expect = 2e-30, Method: Compositional matrix adjust.
+ Identities = 64/180 (36%), Positives = 98/180 (54%), Gaps = 8/180 (4%)
+
+Query  8    IVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPEKNRP  67
+            +VA ++ MGIGK+G LPW  L  + ++F+ +T T+S   K+N V+MG+KTW SIP K RP
+Sbjct  25   VVAATKEMGIGKDGKLPWN-LPTDLKFFKDITLTTSDSSKKNAVVMGRKTWESIPIKYRP  83
+
+Query  68   LKGRINLVLSRELKEPPQGAH--FLSRSLDDALKLTEQPELANKVDMVWIVGGSSVYKEA  125
+            L GR+N+VL+R                S+D AL L   P     ++ V+++GG  + +EA
+Sbjct  84   LSGRLNVVLTRSGGFDIANTENVVTCSSVDSALDLLAAPPYCLSIERVFVIGGGDILREA  143
+
+Query  126  MNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYKLLPEYPGVLSDVQEEKGIKYKFEVYEK  185
+            +N P    + +T I    + DTF P ID   Y+     P   S    E G+++ F  + +
+Sbjct  144  LNRPSCDAIHLTEIDTSVDCDTFIPAIDTSVYQ-----PWSSSFPVTENGLRFCFTTFVR  198
+
+
+>NP_179230.1 thymidylate synthase 1 [Arabidopsis thaliana]
+Length=519
+
+ Score = 116 bits (291),  Expect = 3e-30, Method: Compositional matrix adjust.
+ Identities = 64/180 (36%), Positives = 98/180 (54%), Gaps = 8/180 (4%)
+
+Query  8    IVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPEKNRP  67
+            +VA ++ MGIGK+G LPW  L  + ++F+ +T T+S   K+N V+MG+KTW SIP K RP
+Sbjct  25   VVAATKEMGIGKDGKLPWN-LPTDLKFFKDITLTTSDSSKKNAVVMGRKTWESIPIKYRP  83
+
+Query  68   LKGRINLVLSRE--LKEPPQGAHFLSRSLDDALKLTEQPELANKVDMVWIVGGSSVYKEA  125
+            L GR+N+VL+R                S+D AL L   P     ++ V+++GG  + +EA
+Sbjct  84   LSGRLNVVLTRSGGFDIANTENVVTCSSVDSALDLLAAPPYCLSIERVFVIGGGDILREA  143
+
+Query  126  MNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYKLLPEYPGVLSDVQEEKGIKYKFEVYEK  185
+            +N P    + +T I    + DTF P ID   Y+     P   S    E G+++ F  + +
+Sbjct  144  LNRPSCDAIHLTEIDTSVDCDTFIPAIDTSVYQ-----PWSSSFPVTENGLRFCFTTFVR  198
+
+
+>NP_001324593.1 thymidylate synthase 1 [Arabidopsis thaliana]
+Length=519
+
+ Score = 116 bits (291),  Expect = 3e-30, Method: Compositional matrix adjust.
+ Identities = 64/180 (36%), Positives = 98/180 (54%), Gaps = 8/180 (4%)
+
+Query  8    IVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPEKNRP  67
+            +VA ++ MGIGK+G LPW  L  + ++F+ +T T+S   K+N V+MG+KTW SIP K RP
+Sbjct  25   VVAATKEMGIGKDGKLPWN-LPTDLKFFKDITLTTSDSSKKNAVVMGRKTWESIPIKYRP  83
+
+Query  68   LKGRINLVLSRE--LKEPPQGAHFLSRSLDDALKLTEQPELANKVDMVWIVGGSSVYKEA  125
+            L GR+N+VL+R                S+D AL L   P     ++ V+++GG  + +EA
+Sbjct  84   LSGRLNVVLTRSGGFDIANTENVVTCSSVDSALDLLAAPPYCLSIERVFVIGGGDILREA  143
+
+Query  126  MNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYKLLPEYPGVLSDVQEEKGIKYKFEVYEK  185
+            +N P    + +T I    + DTF P ID   Y+     P   S    E G+++ F  + +
+Sbjct  144  LNRPSCDAIHLTEIDTSVDCDTFIPAIDTSVYQ-----PWSSSFPVTENGLRFCFTTFVR  198
+
+
+>NP_001324557.1 Bifunctional dihydrofolate reductase/thymidylate synthase [Arabidopsis 
+thaliana]
+Length=489
+
+ Score = 95.5 bits (236),  Expect = 1e-22, Method: Compositional matrix adjust.
+ Identities = 58/189 (31%), Positives = 97/189 (51%), Gaps = 22/189 (12%)
+
+Query  4    SLNCIVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPE  63
+            S   ++A +++MG+G +  LPW  L +E+++FQ +TT +S   K+N  IMG+K+W S P 
+Sbjct  23   SYQVVIAATRDMGLGMDMKLPWD-LPSEYQFFQDVTTRTSDPTKRNATIMGRKSWESTPL  81
+
+Query  64   KNRPLKGRINLVLSRELKEPPQGAH--------FLSRSLDDALKLTEQPELANKVDMVWI  115
+            + RPL GR+N+VL++         H         +S S++ AL+L      +  ++ V++
+Sbjct  82   EIRPLPGRLNIVLTK------SSCHNIAIDENVLVSSSMESALELLATEPYSLSIEKVFV  135
+
+Query  116  VGGSSVYKEAMNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYK-LLPEYPGVLSDVQEEK  174
+            +GG  + +  MN      + +T I      D F P +D   Y+     +P V      E 
+Sbjct  136  IGGGELLRNYMNASICDAIHLTEIDISVPCDAFAPRVDTSLYRPWYSSFPVV------EN  189
+
+Query  175  GIKYKFEVY  183
+            GI+Y F  Y
+Sbjct  190  GIRYSFNTY  198
+
+
+>NP_179750.1 Bifunctional dihydrofolate reductase/thymidylate synthase [Arabidopsis 
+thaliana]
+Length=492
+
+ Score = 95.1 bits (235),  Expect = 2e-22, Method: Compositional matrix adjust.
+ Identities = 58/189 (31%), Positives = 97/189 (51%), Gaps = 22/189 (12%)
+
+Query  4    SLNCIVAVSQNMGIGKNGDLPWPPLRNEFRYFQRMTTTSSVEGKQNLVIMGKKTWFSIPE  63
+            S   ++A +++MG+G +  LPW  L +E+++FQ +TT +S   K+N  IMG+K+W S P 
+Sbjct  23   SYQVVIAATRDMGLGMDMKLPWD-LPSEYQFFQDVTTRTSDPTKRNATIMGRKSWESTPL  81
+
+Query  64   KNRPLKGRINLVLSRELKEPPQGAH--------FLSRSLDDALKLTEQPELANKVDMVWI  115
+            + RPL GR+N+VL++         H         +S S++ AL+L      +  ++ V++
+Sbjct  82   EIRPLPGRLNIVLTK------SSCHNIAIDENVLVSSSMESALELLATEPYSLSIEKVFV  135
+
+Query  116  VGGSSVYKEAMNHPGHLKLFVTRIMQDFESDTFFPEIDLEKYK-LLPEYPGVLSDVQEEK  174
+            +GG  + +  MN      + +T I      D F P +D   Y+     +P V      E 
+Sbjct  136  IGGGELLRNYMNASICDAIHLTEIDISVPCDAFAPRVDTSLYRPWYSSFPVV------EN  189
+
+Query  175  GIKYKFEVY  183
+            GI+Y F  Y
+Sbjct  190  GIRYSFNTY  198
+
+
+
+Lambda      K        H        a         alpha
+   0.317    0.137    0.405    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 1454969340
+
+
+  Database: arabidopsis_thaliana.fas
+    Posted date:  May 23, 2018  2:29 PM
+  Number of letters in database: 20,856,276
+  Number of sequences in database:  48,350
+
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Neighboring words threshold: 11
+Window for multiple hits: 40
