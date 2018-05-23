@@ -60,14 +60,15 @@ This associates your set of sequences to the NCBI Taxa ID number of your organis
 Now we can go ahead and run the `makeblastdb` command on our four sequence files (I have only included one example of the output message that you will receive):
 
 ```bash
+$ makeblastdb -in acanthamoeba_castellanii.fas -dbtype prot -parse_seqids -taxid 5755
 $ makeblastdb -in arabidopsis_thaliana.fas -dbtype prot -parse_seqids -taxid 3702
 $ makeblastdb -in cyanidioschyzon_merolae.fas -dbtype prot -parse_seqids -taxid 45157
-$ makeblastdb -in entamoeba_histolytica.fas -dbtype prot -parse_seqids -taxid 5759
 $ makeblastdb -in homo_sapiens.fas -dbtype prot -parse_seqids -taxid 9606
+$ makeblastdb -in saccharomyces_cerevisiae.fas -dbtype prot -parse_seqids -taxid 4932
 $ makeblastdb -in trypanosoma_brucei.fas -dbtype prot -parse_seqids -taxid 5691
 
 Building a new DB, current time: 05/23/2018 14:29:34
-New DB name:   /home/cs02gl/Dropbox/git/tutorials/blast/trypanosoma_brucei.fas
+New DB name:   trypanosoma_brucei.fas
 New DB title:  trypanosoma_brucei.fas
 Sequence type: Protein
 Keep Linkouts: T
@@ -93,20 +94,20 @@ You can now go ahead and run individual blast queries against these database, sk
 Often you will want to blast several taxa at one time but keep their sequences separate from one another. This tool allows you to do that by creating an 'alias' file that tells blast to use several databases at once. It does a whole bunch of other things too, but they're for another day. It has a similar set of input option as above, but we'll just jumpt straight in to the command.
 
 ```bash
-$ blastdb_aliastool -title eukaryotes -out eukaryotes -dbtype prot -dblist "arabidopsis_thaliana.fas cyanidioschyzon_merolae.fas entamoeba_histolytica.fas homo_sapiens.fas trypanosoma_brucei.fas"
+$ blastdb_aliastool -title eukaryotes -out eukaryotes -dbtype prot -dblist "acanthamoeba_castellanii.fas arabidopsis_thaliana.fas cyanidioschyzon_merolae.fas homo_sapiens.fas saccharomyces_cerevisiae.fas trypanosoma_brucei.fas"
 
-Created protein BLAST (alias) database eukaryotes with 184758 sequences
+Created protein BLAST (alias) database eukaryotes with 197571 sequences
 ```
 This will have created a file `eukaryotes.pal` (a Protein Alias File) for blast use. Inside, it is a simple text file, you will see:
 
 ```
 #
-# Alias file created 05/23/2018 14:45:50
+# Alias file created 05/23/2018 16:28:16
 #
 TITLE eukaryotes
-DBLIST "arabidopsis_thaliana.fas" "cyanidioschyzon_merolae.fas" "entamoeba_histolytica.fas" "homo_sapiens.fas" "trypanosoma_brucei.fas"
-NSEQ 184758
-LENGTH 106944079
+DBLIST "acanthamoeba_castellanii.fas" "arabidopsis_thaliana.fas" "cyanidioschyzon_merolae.fas" "homo_sapiens.fas" "saccharomyces_cerevisiae.fas" "trypanosoma_brucei.fas" 
+NSEQ 197571
+LENGTH 113019704
 ```
 this describes, which files are included in this 'database' and the total number of sequences and total length in base pairs of all those sequences. You will need to keep all of the fasta files, blast db files and .pal files together.
 
@@ -233,10 +234,9 @@ We can see the first top 6 hits from the previous search, but now we have some m
 Try the command again but this time editing the output format to include the scientific name of the taxa. Here we have indicated that we want format '6' with the standard output 'std' along with the subject's scientific name 'sscinames'.
 
 ```
-$ blastp -db eukaryotes -query query_one.fas -out query_one_vs_eukaryotes_1e-10.tab -evalue 1e-10 -outfmt '6 std sscinames' -max_target_seqs 10 -num_threads
+$ blastp -db eukaryotes -query query_one.fas -out query_one_vs_eukaryotes_1e-10.tab -evalue 1e-10 -outfmt '6 std sscinames' -max_target_seqs 10 -num_threads 2
 
 $ cat query_one_vs_eukaryotes_1e-10.tab
-
 AAH03584.2	NP_000782.1	100.00	187	0	0	1	187	1	187	3e-137	387	Homo sapiens
 AAH03584.2	XP_011510839.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
 AAH03584.2	NP_789785.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
@@ -248,10 +248,42 @@ AAH03584.2	NP_001328950.1	35.39	178	107	3	8	183	22	193	6e-31	120	Arabidopsis tha
 AAH03584.2	NP_001328948.1	35.39	178	107	3	8	183	22	193	6e-31	120	Arabidopsis thaliana
 AAH03584.2	NP_195183.2	35.39	178	107	3	8	183	69	240	6e-31	121	Arabidopsis thaliana
 ```
-That's much better! Now we can see which accession is from which taxa! You can now experiment with the other output options to your heart's content.
+That's much better! Now we can see which accession is from which taxa! Why do you think that the percent ID is low for the Arabidopsis hits? Also now you can experiment with the other output options to your heart's content.
 
+Now let's try with our second query file, if you have had a look in this file already you will notice that it has two sequences - you may end up query 10s to 100s (and maybe even 1000s) of sequences against a database - this will let you see how to interpret the results when there are more than 1 queries.
 
+```
+$ blastp -db eukaryotes -query query_two.fas -out query_two_vs_eukaryotes_1e-10.tab -evalue 1e-10 -outfmt '6 std sscinames' -max_target_seqs 10 -num_threads 2
 
+$ cat query_two_vs_eukaryotes_1e-10.tab
+AAH03584.2	NP_000782.1	100.00	187	0	0	1	187	1	187	3e-137	387	Homo sapiens
+AAH03584.2	XP_011510839.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
+AAH03584.2	NP_789785.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
+AAH03584.2	NP_001182572.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
+AAH03584.2	NP_001277283.1	100.00	135	0	0	53	187	1	135	6e-95	278	Homo sapiens
+AAH03584.2	NP_001277286.1	100.00	123	0	0	1	123	1	123	4e-86	255	Homo sapiens
+AAH03584.2	NP_001328947.1	35.39	178	107	3	8	183	69	240	2e-31	121	Arabidopsis thaliana
+AAH03584.2	NP_001328950.1	35.39	178	107	3	8	183	22	193	6e-31	120	Arabidopsis thaliana
+AAH03584.2	NP_001328948.1	35.39	178	107	3	8	183	22	193	6e-31	120	Arabidopsis thaliana
+AAH03584.2	NP_195183.2	35.39	178	107	3	8	183	69	240	6e-31	121	Arabidopsis thaliana
+AAX78868.1	XP_011775023.1	99.81	527	1	0	1	527	1	527	0.0	1090	Trypanosoma brucei
+AAX78868.1	XP_005539048.1	49.08	544	216	12	25	527	12	535	7e-162	477	Cyanidioschyzon merolae
+AAX78868.1	NP_195183.2	46.76	556	239	12	3	527	36	565	8e-161	476	Arabidopsis thaliana
+AAX78868.1	NP_001328949.1	47.38	534	228	10	21	527	33	540	2e-160	474	Arabidopsis thaliana
+AAX78868.1	NP_001328950.1	47.38	534	228	10	21	527	11	518	2e-160	473	Arabidopsis thaliana
+AAX78868.1	NP_001328948.1	47.38	534	228	10	21	527	11	518	2e-160	473	Arabidopsis thaliana
+AAX78868.1	NP_179230.1	47.18	532	230	9	21	527	14	519	8e-159	469	Arabidopsis thaliana
+AAX78868.1	NP_001324593.1	47.18	532	230	9	21	527	14	519	8e-159	469	Arabidopsis thaliana
+AAX78868.1	NP_001062.1	60.35	285	112	1	243	527	30	313	7e-124	372	Homo sapiens
+AAX78868.1	NP_014717.2	58.19	299	115	3	239	527	6	304	1e-123	371	Saccharomyces cerevisiae
+```
+You'll notice now we have a lot more output! You can see the original search we did (as query_two.fas has the original query sequence and a new one too) and results from a new search.
 
+The more observant of you will have noticed that there are no hits from _Acanthamoeba castellanii_! Why could this be? What happens if you run this:
 
+```
+$ blastp -db acanthamoeba_castellanii.fas -query query_two.fas -out query_two_vs_acanthamoeba_1e-10.tab -evalue 1e-10 -outfmt 6 -max_target_seqs 10 -num_threads 2
+```
+
+## Part 3: Sequence Retrieval 
 
