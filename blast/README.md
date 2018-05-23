@@ -108,7 +108,79 @@ DBLIST "arabidopsis_thaliana.fas" "cyanidioschyzon_merolae.fas" "entamoeba_histo
 NSEQ 184758
 LENGTH 106944079
 ```
-this describes, which files are included in this 'database' and the total number of sequences and total length in base pairs of all those sequences. 
+this describes, which files are included in this 'database' and the total number of sequences and total length in base pairs of all those sequences. You will need to keep all of the fasta files, blast db files and .pal files together.
+
+## Part Two: Basic BLAST Searches
+
+Now we will explore the `blastp` program and its options.
+
+```
+$ blastp -h
+
+USAGE
+  blastp [-h] [-help] [-import_search_strategy filename]
+    [-export_search_strategy filename] [-task task_name] [-db database_name]
+    [-dbsize num_letters] [-gilist filename] [-seqidlist filename]
+    [-negative_gilist filename] [-entrez_query entrez_query]
+    [-db_soft_mask filtering_algorithm] [-db_hard_mask filtering_algorithm]
+    [-subject subject_input_file] [-subject_loc range] [-query input_file]
+    [-out output_file] [-evalue evalue] [-word_size int_value]
+    [-gapopen open_penalty] [-gapextend extend_penalty]
+    [-qcov_hsp_perc float_value] [-max_hsps int_value]
+    [-xdrop_ungap float_value] [-xdrop_gap float_value]
+    [-xdrop_gap_final float_value] [-searchsp int_value]
+    [-sum_stats bool_value] [-seg SEG_options] [-soft_masking soft_masking]
+    [-matrix matrix_name] [-threshold float_value] [-culling_limit int_value]
+    [-best_hit_overhang float_value] [-best_hit_score_edge float_value]
+    [-window_size int_value] [-lcase_masking] [-query_loc range]
+    [-parse_deflines] [-outfmt format] [-show_gis]
+    [-num_descriptions int_value] [-num_alignments int_value]
+    [-line_length line_length] [-html] [-max_target_seqs num_sequences]
+    [-num_threads int_value] [-ungapped] [-remote] [-comp_based_stats compo]
+    [-use_sw_tback] [-version]
+
+DESCRIPTION
+   Protein-Protein BLAST 2.2.31+
+
+Use '-help' to print detailed descriptions of command line arguments
+```
+
+Many of these you will not use or will only need in specific circumstances.
+
+### \-db
+This is where you include the database(s) you want to search. If you are only searching one fasta file then you specifiy the full name with extension e.g. `you_file.fasta` but if you are going to use a `.pal` file you do not need to include the extension. The error message is not helpful in this pequliarity.
+### \-query
+This is a file that contains either one more more fasta format sequences that you wish to search for in the databases. They need to be in fasta format but do not have to be formatted with the blast tools above.
+### \-out
+The name and location of the output file which will contain the results of the BLAST+ search
+### \-evalue
+The evalue cut-off you wish to filter your results by, the default is 10 which is very broad!
+### \-outfmt
+Specify the type of output you want, the default is '0' and called pairwise (it will be a text version similar to the blast webpage results you are used to) but it is not particularly useful for bioinformatics applications (human readable formats rarely are. We will look at '0' but change the output to '6' or tabular which is much easier to parse quickly.
+### \-max_target_seqs
+This is roughly the number of hits you want to have included in your blast output. The default is '500' and so may end up including many paralogues (or erroneous hits if you have a broad e-value). We will limit this to 10 for ease.
+### \-num_threads
+This is roughly equivalent to the number of 'cores' your CPU has. It will speed the blast search up if you are able to use more than 1 core. Of course if you are running multiple concurrent blasts, you do not want to specify all the cores on your CPU as they will then have to compete.
+
+```
+$ blastp -db arabidopsis_thaliana.fas -query query_one.fas -out query_one_vs_arabidopsis_1e-10.out -evalue 1e-10 -outfmt 6 -max_target_seqs 10 -num_threads 2
+
+$ cat query_one_vs_arabidopsis_1e-10.out
+
+AAH03584.2	NP_001328947.1	35.39	178	107	3	8	183	69	240	4e-32	121
+AAH03584.2	NP_001328950.1	35.39	178	107	3	8	183	22	193	1e-31	120
+AAH03584.2	NP_001328948.1	35.39	178	107	3	8	183	22	193	1e-31	120
+AAH03584.2	NP_195183.2	35.39	178	107	3	8	183	69	240	1e-31	121
+AAH03584.2	NP_001328949.1	35.39	178	107	3	8	183	44	215	1e-31	120
+AAH03584.2	NP_001324592.1	35.56	180	108	3	8	185	25	198	2e-30	116
+AAH03584.2	NP_179230.1	35.56	180	108	3	8	185	25	198	3e-30	116
+AAH03584.2	NP_001324593.1	35.56	180	108	3	8	185	25	198	3e-30	116
+AAH03584.2	NP_001324557.1	30.69	189	109	5	4	183	23	198	1e-22	95.5
+AAH03584.2	NP_179750.1	30.69	189	109	5	4	183	23	198	2e-22	95.1
+```
+Here we can see the top 10 hits to our query sequence.
+
+
 
 
 
