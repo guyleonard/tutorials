@@ -47,3 +47,22 @@ DESCRIPTION
 ```
 
 For this tutorial we will only look at the '-in' '-dbtype' 'parse_seqids' and '-taxid' options.
+
+### \-in
+This is your input file, it will be the fasta formatted file of your sequences that you wish to search.
+### \-dbtype
+Very simply: either 'nucl' for nucleotide or 'prot' for protein sequences.
+### \-parse_seqids
+Each sequence in a fasta format file has a 'header' containing information such as accession numbers. NCBI has it's own strict format, and for blast to process this you must turn this option on. You can leave it out for files that you have created yourself that don't follow NCBI's or a standard format.
+### \-taxid
+This associates your set of sequences to the NCBI Taxa ID number of your organism - it is useful in downstream analyses to recover taxonomic information automatically. You do not have to include this option however.
+
+Now we can go ahead and run the `makeblastdb` command on our four sequence files:
+
+```bash
+makeblastdb -in taxa_one.fasta -dbtype prot -parse_seqids -taxid XXX
+makeblastdb -in taxa_two.fasta -dbtype prot -parse_seqids -taxid XXX
+makeblastdb -in taxa_three.fasta -dbtype prot -parse_seqids -taxid XXX
+makeblastdb -in taxa_four.fasta -dbtype prot -parse_seqids -taxid XXX
+
+
