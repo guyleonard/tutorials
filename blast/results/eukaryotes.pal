@@ -1,0 +1,7 @@
+#
+# Alias file created 05/23/2018 16:28:16
+#
+TITLE eukaryotes
+DBLIST "acanthamoeba_castellanii.fas" "arabidopsis_thaliana.fas" "cyanidioschyzon_merolae.fas" "homo_sapiens.fas" "saccharomyces_cerevisiae.fas" "trypanosoma_brucei.fas" 
+NSEQ 197571
+LENGTH 113019704
