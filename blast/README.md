@@ -110,10 +110,29 @@ LENGTH 106944079
 ```
 this describes, which files are included in this 'database' and the total number of sequences and total length in base pairs of all those sequences. You will need to keep all of the fasta files, blast db files and .pal files together.
 
+## Taxonomy
+You will need to acquire the blast taxonomy db from NCBI and uncompress the file and store them somewhere safe, to do this you can type the following:
+```
+$ wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz
+
+$ tar zxvf taxdb.tar.gz
+
+$ mkdir taxonomy
+$ cp taxdb.btd taxdb.bti taxonomy
+```
+
+After downloading and uncompressing the taxdb.tar.gz from NCBI you will need to let blast know where to look for these files. We can do this with an 'environment variable' much like PATH but in this case called BLASTDB.
+
+```
+$ export BLASTDB=`pwd`/taxonomy
+```
+Now we are set up to blast some sequence data!
+
 ## Part Two: Basic BLAST Searches
 
 Now we will explore the `blastp` program and its options.
 
+### blastp
 ```
 $ blastp -h
 
@@ -147,19 +166,19 @@ Use '-help' to print detailed descriptions of command line arguments
 
 Many of these you will not use or will only need in specific circumstances.
 
-### \-db
+#### \-db
 This is where you include the database(s) you want to search. If you are only searching one fasta file then you specifiy the full name with extension e.g. `you_file.fasta` but if you are going to use a `.pal` file you do not need to include the extension. The error message is not helpful in this pequliarity.
-### \-query
+#### \-query
 This is a file that contains either one more more fasta format sequences that you wish to search for in the databases. They need to be in fasta format but do not have to be formatted with the blast tools above.
-### \-out
+#### \-out
 The name and location of the output file which will contain the results of the BLAST+ search
-### \-evalue
+#### \-evalue
 The evalue cut-off you wish to filter your results by, the default is 10 which is very broad!
-### \-outfmt
+#### \-outfmt
 Specify the type of output you want, the default is '0' and called pairwise (it will be a text version similar to the blast webpage results you are used to) but it is not particularly useful for bioinformatics applications (human readable formats rarely are. We will look at '0' but change the output to '6' or tabular which is much easier to parse quickly.
-### \-max_target_seqs
+#### \-max_target_seqs
 This is roughly the number of hits you want to have included in your blast output. The default is '500' and so may end up including many paralogues (or erroneous hits if you have a broad e-value). We will limit this to 10 for ease.
-### \-num_threads
+#### \-num_threads
 This is roughly equivalent to the number of 'cores' your CPU has. It will speed the blast search up if you are able to use more than 1 core. Of course if you are running multiple concurrent blasts, you do not want to specify all the cores on your CPU as they will then have to compete.
 
 We will first run the blast command with the default output options so you can see what it looks like.
@@ -185,7 +204,6 @@ AAH03584.2	NP_789785.1	93.44	183	12	0	5	187	5	187	1e-123	352
 AAH03584.2	NP_001182572.1	93.44	183	12	0	5	187	5	187	1e-123	352
 AAH03584.2	NP_001277283.1	100.00	135	0	0	53	187	1	135	4e-95	278
 AAH03584.2	NP_001277286.1	100.00	123	0	0	1	123	1	123	3e-86	255
-
 ```
 
 Looking at the first line we can see our query accession `AAH03584.2` has hit the accession `NP_000782.1` in the database. The columns are ordered thus: query id and subject id followed by the percent identity, alignment length      number of mismatches, gap openings, query start position and query end position, the subject start and subject end and finally the e_value and bit_score.
@@ -211,6 +229,27 @@ We can see the first top 6 hits from the previous search, but now we have some m
  1) search through each fasta file manually - slow but easy if you know 'grep'
  2) search the accession on the NCBI website - slow and requires web browser
  3) get BLAST to tell us, but we need the taxonomy dump files - fast (after set up)
+
+Try the command again but this time editing the output format to include the scientific name of the taxa. Here we have indicated that we want format '6' with the standard output 'std' along with the subject's scientific name 'sscinames'.
+
+```
+$ blastp -db eukaryotes -query query_one.fas -out query_one_vs_eukaryotes_1e-10.tab -evalue 1e-10 -outfmt '6 std sscinames' -max_target_seqs 10 -num_threads
+
+$ cat query_one_vs_eukaryotes_1e-10.tab
+
+AAH03584.2	NP_000782.1	100.00	187	0	0	1	187	1	187	3e-137	387	Homo sapiens
+AAH03584.2	XP_011510839.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
+AAH03584.2	NP_789785.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
+AAH03584.2	NP_001182572.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
+AAH03584.2	NP_001277283.1	100.00	135	0	0	53	187	1	135	6e-95	278	Homo sapiens
+AAH03584.2	NP_001277286.1	100.00	123	0	0	1	123	1	123	4e-86	255	Homo sapiens
+AAH03584.2	NP_001328947.1	35.39	178	107	3	8	183	69	240	2e-31	121	Arabidopsis thaliana
+AAH03584.2	NP_001328950.1	35.39	178	107	3	8	183	22	193	6e-31	120	Arabidopsis thaliana
+AAH03584.2	NP_001328948.1	35.39	178	107	3	8	183	22	193	6e-31	120	Arabidopsis thaliana
+AAH03584.2	NP_195183.2	35.39	178	107	3	8	183	69	240	6e-31	121	Arabidopsis thaliana
+```
+That's much better! Now we can see which accession is from which taxa! You can now experiment with the other output options to your heart's content.
+
 
 
 
