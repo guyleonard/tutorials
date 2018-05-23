@@ -97,6 +97,18 @@ $ blastdb_aliastool -title eukaryotes -out eukaryotes -dbtype prot -dblist "arab
 
 Created protein BLAST (alias) database eukaryotes with 184758 sequences
 ```
+This will have created a file `eukaryotes.pal` (a Protein Alias File) for blast use. Inside, it is a simple text file, you will see:
+
+```
+#
+# Alias file created 05/23/2018 14:45:50
+#
+TITLE eukaryotes
+DBLIST "arabidopsis_thaliana.fas" "cyanidioschyzon_merolae.fas" "entamoeba_histolytica.fas" "homo_sapiens.fas" "trypanosoma_brucei.fas"
+NSEQ 184758
+LENGTH 106944079
+```
+this describes, which files are included in this 'database' and the total number of sequences and total length in base pairs of all those sequences. 
 
 
 
