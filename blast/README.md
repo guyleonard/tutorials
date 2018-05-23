@@ -16,7 +16,7 @@ You will need:
  * the BLAST+ executables available from [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
  * an example query sequence (query.fasta)
  * a set of fasta format predicted proteins from several taxa (taxa_one.fasta, taxa_two.fasta, taxa_three.fasta, taxa_four.fasta)
- * the NCBI Taxonomy Dump files from [here](ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz)
+ * the NCBI Taxonomy DB files from [here](ftp://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz)
 
 You will need to clone this directory to your local hardrive/user space and make sure the blast binaries/executables are accessible in your command line. If you are using the "roger" servers (ramjet, romanoff, roadrunner) they should all be available at the command line or in modules.
 
@@ -208,8 +208,8 @@ AAH03584.2	NP_001328948.1	35.39	178	107	3	8	183	22	193	6e-31	120
 AAH03584.2	NP_195183.2	35.39	178	107	3	8	183	69	240	6e-31	121
 ```
 We can see the first top 6 hits from the previous search, but now we have some more hits too! But where did they come from? There are three ways to find out:
- 1) search each file manually - slow
- 2) search the accession on the NCBI website - slow, requires web browser
+ 1) search through each fasta file manually - slow but easy if you know 'grep'
+ 2) search the accession on the NCBI website - slow and requires web browser
  3) get BLAST to tell us, but we need the taxonomy dump files - fast (after set up)
 
 
