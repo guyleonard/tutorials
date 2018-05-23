@@ -250,8 +250,34 @@ AAH03584.2	NP_195183.2	35.39	178	107	3	8	183	69	240	6e-31	121	Arabidopsis thalia
 ```
 That's much better! Now we can see which accession is from which taxa! You can now experiment with the other output options to your heart's content.
 
+Now let's try with our second query file, if you have had a look in this file already you will notice that it has two sequences - you may end up query 10s to 100s (and maybe even 1000s) of sequences against a database - this will let you see how to interpret the results when there are more than 1 queries.
 
+```
+$ blastp -db eukaryotes -query query_two.fas -out query_two_vs_eukaryotes_1e-10.tab -evalue 1e-10 -outfmt '6 std sscinames' -max_target_seqs 10 -num_threads
 
+$ cat query_two_vs_eukaryotes_1e-10.tab
+
+AAH03584.2	NP_000782.1	100.00	187	0	0	1	187	1	187	3e-137	387	Homo sapiens
+AAH03584.2	XP_011510839.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
+AAH03584.2	NP_789785.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
+AAH03584.2	NP_001182572.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
+AAH03584.2	NP_001277283.1	100.00	135	0	0	53	187	1	135	6e-95	278	Homo sapiens
+AAH03584.2	NP_001277286.1	100.00	123	0	0	1	123	1	123	4e-86	255	Homo sapiens
+AAH03584.2	NP_001328947.1	35.39	178	107	3	8	183	69	240	2e-31	121	Arabidopsis thaliana
+AAH03584.2	NP_001328950.1	35.39	178	107	3	8	183	22	193	6e-31	120	Arabidopsis thaliana
+AAH03584.2	NP_001328948.1	35.39	178	107	3	8	183	22	193	6e-31	120	Arabidopsis thaliana
+AAH03584.2	NP_195183.2	35.39	178	107	3	8	183	69	240	6e-31	121	Arabidopsis thaliana
+**AAX78868.1	XP_011775023.1	99.81	527	1	0	1	527	1	527	0.0	1090	Trypanosoma brucei
+AAX78868.1	XP_005539048.1	49.08	544	216	12	25	527	12	535	7e-162	477	Cyanidioschyzon merolae
+AAX78868.1	NP_195183.2	46.76	556	239	12	3	527	36	565	7e-161	476	Arabidopsis thaliana
+AAX78868.1	NP_001328949.1	47.38	534	228	10	21	527	33	540	2e-160	474	Arabidopsis thaliana
+AAX78868.1	NP_001328950.1	47.38	534	228	10	21	527	11	518	2e-160	473	Arabidopsis thaliana
+AAX78868.1	NP_001328948.1	47.38	534	228	10	21	527	11	518	2e-160	473	Arabidopsis thaliana
+AAX78868.1	NP_179230.1	47.18	532	230	9	21	527	14	519	8e-159	469	Arabidopsis thaliana
+AAX78868.1	NP_001324593.1	47.18	532	230	9	21	527	14	519	8e-159	469	Arabidopsis thaliana
+AAX78868.1	NP_001062.1	60.35	285	112	1	243	527	30	313	6e-124	372	Homo sapiens
+AAX78868.1	NP_001324592.1	45.58	419	177	9	21	414	14	406	6e-109	337	Arabidopsis thaliana**
+```
 
 
 
