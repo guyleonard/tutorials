@@ -57,12 +57,24 @@ Each sequence in a fasta format file has a 'header' containing information such 
 ### \-taxid
 This associates your set of sequences to the NCBI Taxa ID number of your organism - it is useful in downstream analyses to recover taxonomic information automatically. You do not have to include this option however.
 
-Now we can go ahead and run the `makeblastdb` command on our four sequence files:
+Now we can go ahead and run the `makeblastdb` command on our four sequence files (I have only included one example of the output message that you will receive):
 
 ```bash
-makeblastdb -in taxa_one.fasta -dbtype prot -parse_seqids -taxid XXX
-makeblastdb -in taxa_two.fasta -dbtype prot -parse_seqids -taxid XXX
-makeblastdb -in taxa_three.fasta -dbtype prot -parse_seqids -taxid XXX
-makeblastdb -in taxa_four.fasta -dbtype prot -parse_seqids -taxid XXX
+$ makeblastdb -in arabidopsis_thaliana.fas -dbtype prot -parse_seqids -taxid 3702
+$ makeblastdb -in cyanidioschyzon_merolae.fas -dbtype prot -parse_seqids -taxid 45157
+$ makeblastdb -in entamoeba_histolytica.fas -dbtype prot -parse_seqids -taxid 5759
+$ makeblastdb -in homo_sapiens.fas -dbtype prot -parse_seqids -taxid 9606
+$ makeblastdb -in trypanosoma_brucei.fas -dbtype prot -parse_seqids -taxid 5691
+
+Building a new DB, current time: 05/23/2018 14:29:34
+New DB name:   /home/cs02gl/Dropbox/git/tutorials/blast/trypanosoma_brucei.fas
+New DB title:  trypanosoma_brucei.fas
+Sequence type: Protein
+Keep Linkouts: T
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 9822 sequences in 0.574554 seconds.
+```
+
 
 
