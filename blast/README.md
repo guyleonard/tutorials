@@ -231,12 +231,12 @@ We can see the first top 6 hits from the previous search, but now we have some m
  2) search the accession on the NCBI website - slow and requires web browser
  3) get BLAST to tell us, but we need the taxonomy dump files - fast (after set up)
 
-Try the command again but this time editing the output format to include the scientific name of the taxa. Here we have indicated that we want format '6' with the standard output 'std' along with the subject's scientific name 'sscinames'.
+Try the command again but this time editing the output format to include the scientific name of the taxa. Here we have indicated that we want format '6' with the standard output 'std' along with the subject's scientific name 'sscinames'. Remember this will only work if you have 1) formatted your blast DBs with the NCBI TaxID of your organism and 2) set up the NCBI Tax DB. Instead you may wish to use 'stitle' which will include information from the fasta file from the accession line of that sequenc (i.e. the header).
 
 ```
-$ blastp -db eukaryotes -query query_one.fas -out query_one_vs_eukaryotes_1e-10.tab -evalue 1e-10 -outfmt '6 std sscinames' -max_target_seqs 10 -num_threads 2
+$ blastp -db eukaryotes -query query_one.fas -out query_one_vs_eukaryotes_1e-10_scinames.tab -evalue 1e-10 -outfmt '6 std sscinames' -max_target_seqs 10 -num_threads 2
 
-$ cat query_one_vs_eukaryotes_1e-10.tab
+$ cat query_one_vs_eukaryotes_1e-10_scinames.tab
 AAH03584.2	NP_000782.1	100.00	187	0	0	1	187	1	187	3e-137	387	Homo sapiens
 AAH03584.2	XP_011510839.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
 AAH03584.2	NP_789785.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
@@ -253,9 +253,9 @@ That's much better! Now we can see which accession is from which taxa! Why do yo
 Now let's try with our second query file, if you have had a look in this file already you will notice that it has two sequences - you may end up query 10s to 100s (and maybe even 1000s) of sequences against a database - this will let you see how to interpret the results when there are more than 1 queries.
 
 ```
-$ blastp -db eukaryotes -query query_two.fas -out query_two_vs_eukaryotes_1e-10.tab -evalue 1e-10 -outfmt '6 std sscinames' -max_target_seqs 10 -num_threads 2
+$ blastp -db eukaryotes -query query_two.fas -out query_two_vs_eukaryotes_1e-10_scinames.tab -evalue 1e-10 -outfmt '6 std sscinames' -max_target_seqs 10 -num_threads 2
 
-$ cat query_two_vs_eukaryotes_1e-10.tab
+$ cat query_two_vs_eukaryotes_1e-10_scinames.tab
 AAH03584.2	NP_000782.1	100.00	187	0	0	1	187	1	187	3e-137	387	Homo sapiens
 AAH03584.2	XP_011510839.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
 AAH03584.2	NP_789785.1	93.44	183	12	0	5	187	5	187	2e-123	352	Homo sapiens
@@ -285,5 +285,26 @@ The more observant of you will have noticed that there are no hits from _Acantha
 $ blastp -db acanthamoeba_castellanii.fas -query query_two.fas -out query_two_vs_acanthamoeba_1e-10.tab -evalue 1e-10 -outfmt 6 -max_target_seqs 10 -num_threads 2
 ```
 
-## Part 3: Sequence Retrieval 
+## Part 3: Sequence Retrieval
+Now that you have identified your top hits you will want to extract those sequences from the blast databases for downstream analysis e.g. phylogenomics. Blast has a handy tool for this - `blastdbcmd` - however it can be quite particular and has many issues, especially with non-standard NCBI formated header lines in fasta files. Sigh.
+
+Firstly, we need to get a list of the accessions we are interested in. Luckily our BLAST output is in a tabulated format and we can do that very easily with some unix tools:
+
+```
+$ cat query_two_vs_eukaryotes_1e-10_scinames.tab | cut -f 2 | sort -u > results.txt
+```
+This command reads the output file (with _cat_) then _cut_\s the text based on columns (in our case we want the second colum - 2 - as these are the hit/subject accesions. The column is then _sort_\ed and duplicates are removed (-u option). Finally the accessions are output (>) in a file called 'results.txt'. The '|' symbol is a pipe, and each program's output is piped into the next's as input - hence the term _pipeline_.
+
+### blastdbcmd
+#### \-db
+Simply the database you wish to retrieve the sequences from - in our case eukaryotes.pal.
+#### \-entry_batch
+This is the results.txt file we generate above, it is a list of accessions you want to retrieve - one per line.
+#### \-out
+The file where you want the sequences to go, otherwise they will be printed to your screen.
+
+```
+$ blastdbcmd -db eukaryotes -entry_batch results.txt -out results.fasta
+```
+Now you have a fasta formated file of your results! Yay!
 
