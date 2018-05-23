@@ -22,7 +22,7 @@ You will need to clone this directory to your local hardrive/user space and make
 
 When you see a $ sign and a program name after it, you should go ahead and run that command in your terminal (try not to copy and paste!). For example:
 
-`$ls -lath` will give you a listing of your current directory location.
+`$ ls -lath` will give you a listing of your current directory location.
 
 # Part One: Creating a BLAST Database
 
@@ -74,6 +74,28 @@ Keep Linkouts: T
 Keep MBits: T
 Maximum file size: 1000000000B
 Adding sequences from FASTA; added 9822 sequences in 0.574554 seconds.
+```
+You will also notice that this command has created several new files with similar names to your original input files:
+
+```bash
+arabidopsis_thaliana.fas.phr
+arabidopsis_thaliana.fas.pin
+arabidopsis_thaliana.fas.pog
+arabidopsis_thaliana.fas.psd
+arabidopsis_thaliana.fas.psi
+arabidopsis_thaliana.fas.psq
+```
+You don't need to know what each of these do, but they are needed by blast to search the database, you don't have to specify them in the blast command, it will automatically look for them wherever you fasta file happens to be. You will need to re-run the above commands if you make any changes to the fasta files.
+
+You can now go ahead and run individual blast queries against these database, skip to Part Two or continue on to group all of these databases in to one database.
+
+## blastdb_aliastool
+Often you will want to blast several taxa at one time but keep their sequences separate from one another. This tool allows you to do that by creating an 'alias' file that tells blast to use several databases at once. It does a whole bunch of other things too, but they're for another day. It has a similar set of input option as above, but we'll just jumpt straight in to the command.
+
+```bash
+$ blastdb_aliastool -title eukaryotes -out eukaryotes -dbtype prot -dblist "arabidopsis_thaliana.fas cyanidioschyzon_merolae.fas entamoeba_histolytica.fas homo_sapiens.fas trypanosoma_brucei.fas"
+
+Created protein BLAST (alias) database eukaryotes with 184758 sequences
 ```
 
 
