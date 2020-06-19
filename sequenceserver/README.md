@@ -95,6 +95,56 @@ Congrats, a new protein database has been created. You can now reissue the "sequ
 
 If you are running this on your local machine it will also open your default browser to 'localhost:4567' and show you the blast server interface. If you are running remotely, connect to the server's address on 'ip-address:4567'.
 
+'Ctrl+C' will shutdown the server when you are finished with it.
+
+### Previously Created Databases
+You can use sequenceserver with databases you previously made, e.g. in the [blast tutorial](https://github.com/guyleonard/tutorials/tree/main/blast) or any other blast databases you have previously made.
+```bash
+sequenceserver -d ../blast
+# or
+sequenceserver -d /path/to/your/databases
+```
+
+## Import Command Line Blast Results
+There are some prerequisites that you need to follow, the major issue is that sequenceserver can only import XML output from blast, but it is likely that you have either the default output or the tabulated output. For now there is nothing much we can do about that other than rerun your blasts with XML output.
+
+However, any future blasts that you conduct can follow the process below. We won't output either XML or TAB formated files, but use the ASN.1 format instead. This is called the 'blast archive' format, and it gives us the advantage that it can easily be converted in to any other blast format at a later stage with the tool "blast_formatter".
+
+For example, if your normal blast process is similar to below:
+```bash
+blastp -query query_one.fasta -db saccharomyces_cerevisiae.fasta -evalue 1e-10 -outfmt '6 qseqid staxids bitscore std' -out query_one_vs_saccharomyces_cerevisiae_1e-10.tsv
+```
+
+We can replace it with:
+```bash
+blastp -query query_one.fasta -db saccharomyces_cerevisiae.fasta -evalue 1e-10 -outfmt 11 -out query_one_vs_saccharomyces_cerevisiae_1e-10.asn
+```
+
+Then we use 'blast_formatter', thus:
+```bash
+blast_formatter -archive query_one_vs_saccharomyces_cerevisiae_1e-10.asn -outfmt '6 qseqid staxids bitscore std' -out query_one_vs_saccharomyces_cerevisiae_1e-10_formatter.tsv
+```
+
+Ta da! We should end up with the same output :) And now we can also output the XML.
+```bash
+blast_formatter -archive query_one_vs_saccharomyces_cerevisiae_1e-10.asn -outfmt 5 -out query_one_vs_saccharomyces_cerevisiae_1e-10_formatter.xml
+```
+
+This can be imported in to sequencerserver by doing:
+```bash
+sequenceserver -x query_one_vs_saccharomyces_cerevisiae_1e-10_formatter.xml
+```
+
+A bit confusingly this will only output a random string of letters and numbers - similar in style to a hash - e.g. "4c7adacf-7ca1-4119-bab6-abea40173c9c". You will need to then run "sequenceserver" on its own and add this number to the web browser link to view it. For example, run:
+```bash
+sequenceserver
+```
+
+Now got to 'http://localhost:4567/4c7adacf-7ca1-4119-bab6-abea40173c9c" and you should be able to view your results graphically.
+
+
+
+
 
 
 
