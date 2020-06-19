@@ -43,4 +43,58 @@ export PATH=$PATH:/home/username/.gem/ruby/2.X.X/bin
 ### Dependencies
 You will also need BLAST+ exectuables in your PATH. We won't go through installation of those here, but you can refer to instructions in the tutorial [here](https://github.com/guyleonard/tutorials/tree/main/blast) or install them via 'conda'. You can get to see if they are installed with "blastn --version". Sequenceserver will also offer to download them for you if it cannot find them in PATH.
 
+## Running Sequenceserver
+In this tutorial there is one 'fasta' file in the directory "saccharomycese_cerevisiae.fas", let's see what happens when we try and run sequenceserver in the current directory.
+```bash
+sequenceserver -d .
+```
+
+```bash
+[2020-06-19 14:55:14] INFO  Reading configuration file: /home/user/.sequenceserver.conf.
+
+Could not find BLAST+ databases in: /home/user/tutorials/sequenceserver.
+
+Search for FASTA files (.fa, .fasta, .fna) in '/home/user/tutorials/sequenceserver' and try
+creating BLAST+ databases? [y/n] (Default: y).
+
+>>
+```
+
+As you can see, sequenceserver detects that there are no blast databases available, however it is capable of creating one for you from files it can detect with the right extensions (e.g. .fa, .fasta, .fna). Let's say 'yes'.
+```bash
+Searching ...
+
+FASTA file: /home/cs02gl/Desktop/git/tutorials/sequenceserver/saccharomyces_cerevisiae.fasta
+FASTA type: protein
+Proceed? [y/n] (Default: y): 
+```
+
+It detects the 'fasta' file and asks if you wish to create a database. Say 'yes' again, and click 'enter' to accept the defaults for 'database title' and 'taxid'.
+```bash
+Enter a database title or will use 'saccharomyces cerevisiae': 
+Enter taxid (optional): 
+
+Building a new DB, current time: 06/19/2020 15:02:35
+New DB name:   /home/cs02gl/Desktop/git/tutorials/sequenceserver/saccharomyces_cerevisiae.fasta
+New DB title:  saccharomyces cerevisiae
+Sequence type: Protein
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 6002 sequences in 0.21314 seconds.
+```
+Congrats, a new protein database has been created. You can now reissue the "sequenceserver -d ." command to start the server. You should see the message:
+```bash
+[2020-06-19 15:03:37] INFO  Reading configuration file: /home/user/.sequenceserver.conf.
+[2020-06-19 15:03:37] WARN  Will listen on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--host option).
+** SequenceServer is ready.
+   Go to http://localhost:4567 in your browser and start BLASTing!
+   To share your setup, please try one of the following: 
+     -  http://XXX.XXX.X.XX:4567
+   Press CTRL+C to quit.
+```
+
+If you are running this on your local machine it will also open your default browser to 'localhost:4567' and show you the blast server interface. If you are running remotely, connect to the server's address on 'ip-address:4567'.
+
+
+
 
